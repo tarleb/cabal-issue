@@ -19,4 +19,12 @@ RUN cabal update
 RUN git clone --branch=main --depth=1 --quiet \
     https://github.com/jgm/pandoc
 WORKDIR /data/pandoc
-RUN cabal install pandoc-cli
+COPY <<EOF cabal.project.freeze
+active-repositories: hackage.haskell.org:merge
+constraints: lua  +system-lua +pkg-config +hardcode-reg-keys -export-dynamic,
+             lpeg  -rely-on-shared-lpeg-library,
+             aeson-pretty  +lib-only,
+             pandoc  +embed_data_files,
+             pandoc-cli  +lua +nightly +server,
+EOF
+RUN cabal build pandoc-cli
