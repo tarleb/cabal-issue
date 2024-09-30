@@ -7,10 +7,16 @@ RUN apk --no-cache add \
         cabal \
         fakeroot \
         ghc \
+        git \
         gmp-dev \
         libffi \
         libffi-dev \
         yaml \
         zlib-dev
+
+WORKDIR /data
 RUN cabal update
+RUN git clone --branch=main --depth=1 --quiet \
+    https://github.com/jgm/pandoc
+WORKDIR /data/pandoc
 RUN cabal install pandoc-cli
