@@ -21,6 +21,7 @@ RUN cabal update
 RUN git clone --branch=main --depth=1 --quiet \
     https://github.com/jgm/pandoc
 WORKDIR /data/pandoc
+COPY cabal.config /root/.config/cabal/config
 COPY <<EOF cabal.project.freeze
 active-repositories: hackage.haskell.org:merge
 constraints: lua  +system-lua +pkg-config +hardcode-reg-keys -export-dynamic,
