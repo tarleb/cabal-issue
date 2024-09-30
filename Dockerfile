@@ -17,11 +17,11 @@ RUN apk --no-cache add \
         zlib-dev
 
 WORKDIR /data
-RUN cabal update
 RUN git clone --branch=main --depth=1 --quiet \
     https://github.com/jgm/pandoc
 WORKDIR /data/pandoc
 COPY cabal.config /root/.config/cabal/config
+RUN cabal update
 COPY <<EOF cabal.project.freeze
 active-repositories: hackage.haskell.org:merge
 constraints: lua  +system-lua +pkg-config +hardcode-reg-keys -export-dynamic,
