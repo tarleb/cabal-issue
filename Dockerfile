@@ -11,6 +11,8 @@ RUN apk --no-cache add \
         gmp-dev \
         libffi \
         libffi-dev \
+        lua5.4-dev \
+        pkgconfig \
         yaml \
         zlib-dev
 
