@@ -1,0 +1,17 @@
+name: Image Builder
+
+on:
+  push:
+    # Build and publish: configure build via commit message
+    branches:
+      - main
+jobs:
+  # Build images and store them as tar archive
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: docker build .
